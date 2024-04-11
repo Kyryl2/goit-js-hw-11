@@ -14,21 +14,27 @@ form.addEventListener('submit', onClickBtn);
 function onClickBtn(event) {
   event.preventDefault();
   const search = input.value.trim();
+
   if (!search) {
-    return iziToast.show({
-      title: 'Hey',
-      message: 'Please type something',
-      color: 'yellow',
+    list.innerHTML = '';
+
+    event.target.reset();
+
+    return iziToast.error({
+      message: 'Поле для введення не має бути порожнім!',
       position: 'topRight',
+      timeout: 2000,
+      color: 'yellow',
     });
   }
 
   list.innerHTML = '';
   getPhotos(search);
+  //   loader.classList.add('is-visible');
 }
 function getPhotos(q) {
   const parameters = new URLSearchParams({
-    key: '43312748-d2770da7ff63c643db495a6a3',
+    key: '43212506-95870309335e8ebf3ea9c8656',
     q,
     image_type: 'photo',
     orientation: 'horizontal',
@@ -47,8 +53,21 @@ function getPhotos(q) {
       return response.json();
     })
     .then(obj => {
+      if (obj.hits.length === 0) {
+        list.innerHTML = '';
+
+        form.reset();
+
+        iziToast.error({
+          message: 'За вашим пошуковим словом, зображень не знайдено!',
+          position: 'topRight',
+          timeout: 2000,
+        });
+        return;
+      }
       list.innerHTML = createGallaryMarkup(obj.hits);
     })
+
     .catch(error => console.log(error));
 }
 
