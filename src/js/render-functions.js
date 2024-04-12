@@ -3,17 +3,21 @@ export function createGallaryMarkup(array) {
     .map(
       image =>
         `<li class="gallery-item">
-        <a href="${image.largeImageURL}"><img src="${image.webformatURL}" alt="${image.tags}"></a>
-        <div class = "under-photo">
-        <h3>Likes</h3>
+        <div class ="foto"><a href="${image.largeImageURL}"><img src="${image.webformatURL}" alt="${image.tags}"></a></div>
         
-      <p>${image.likes}</p>
-      <h3>Views</h3>
-      <p>${image.views}</p>
-      <h3>Comments</h3>
-      <p>${image.comments}</p>
-      <h3>Downloads</h3>
-      <p>${image.downloads}</p>
+        <div class = "under-photo">
+        
+        <div class ="info"><h3>Likes</h3><p>${image.likes}</p></div>
+      
+      <div class ="info"><h3>Views</h3>
+      <p>${image.views}</p></div>
+      
+      <div class ="info"><h3>Comments</h3>
+      <p>${image.comments}</p></div>
+      
+      <div class ="info"> <h3>Downloads</h3>
+      <p>${image.downloads}</p></div>
+     
 </div>
 
 
